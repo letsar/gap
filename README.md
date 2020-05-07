@@ -1,5 +1,5 @@
 # Gap
-Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows.
+Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or CustomScrollViews.
 
 [![Pub](https://img.shields.io/pub/v/gap.svg)](https://pub.dartlang.org/packages/gap)
 
@@ -39,11 +39,24 @@ is lesser than the specified size, the `MaxGap` widget will only take the availa
 
 It's useful when you want to have a gap that shrinks to avoid an overflow otherwise.
 
+
 ### Other parameters
 
 By default a `Gap` will have no extent in the opposite direction of the `Flex` parent.
 If you want the `Gap` to have a color, you'll have to set the `color` and the `crossAxisExtent` parameters.
 You can also use the `Gap.expand` constructor to expand the `Gap` in the opposite direction of the `Flex` parent.
+
+### SliverGap
+
+There is also a Sliver version of the `Gap` widget:
+
+```dart
+return CustomScrollView(
+  slivers: <Widget>[
+    const SliverGap(20), // Adds an empty space of 20 pixels.
+  ],
+);
+
 
 ## Changelog
 
