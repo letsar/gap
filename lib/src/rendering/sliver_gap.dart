@@ -57,8 +57,8 @@ class RenderSliverGap extends RenderSliver {
       final Paint paint = Paint()..color = color;
       final Size size = constraints
           .asBoxConstraints(
-            minExtent: _mainAxisExtent,
-            maxExtent: _mainAxisExtent,
+            minExtent: geometry.paintExtent,
+            maxExtent: geometry.paintExtent,
           )
           .constrain(Size.zero);
       context.canvas.drawRect(offset & size, paint);
