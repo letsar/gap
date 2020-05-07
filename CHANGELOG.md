@@ -1,3 +1,7 @@
+## 1.1.1
+### Fixed
+- Typo in Readme.
+
 ## 1.1.0
 ### Added
 - `SliverGap` the sliver version of `Gap`.
