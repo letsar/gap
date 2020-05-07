@@ -56,7 +56,7 @@ return CustomScrollView(
     const SliverGap(20), // Adds an empty space of 20 pixels.
   ],
 );
-
+```
 
 ## Changelog
 
