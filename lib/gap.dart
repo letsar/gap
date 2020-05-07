@@ -91,8 +91,10 @@ class Gap extends LeafRenderObjectWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
 
-    properties
-        .add(DoubleProperty('extent', mainAxisExtent, defaultValue: null));
+    properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
+    properties.add(
+        DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
+    properties.add(ColorProperty('color', color));
   }
 }
 
