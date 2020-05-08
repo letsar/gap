@@ -1,5 +1,5 @@
 # Gap
-Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or CustomScrollViews.
+Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or scrolling views.
 
 [![Pub](https://img.shields.io/pub/v/gap.svg)](https://pub.dartlang.org/packages/gap)
 
@@ -30,6 +30,8 @@ return Column(
   ],
 );
 ```
+
+The `Gap` widget also works inside `Scrollable` widgets such as `ListViews`. In these cases, it will occupy the space in the same direction as the `Scrollable`.
 
 ### MaxGap
 

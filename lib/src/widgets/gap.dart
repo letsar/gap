@@ -2,21 +2,22 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/src/rendering/gap.dart';
 
-/// A widget that takes a fixed amount of space in a [Row], [Column],
-/// or [Flex] widget.
+/// A widget that takes a fixed amount of space in the direction of its parent.
 ///
-/// A [Gap] widget must be a descendant of a [Row], [Column], or [Flex],
+/// It only works in the following cases:
+/// - It is a descendant of a [Row], [Column], or [Flex],
 /// and the path from the [Gap] widget to its enclosing [Row], [Column], or
 /// [Flex] must contain only [StatelessWidget]s or [StatefulWidget]s (not other
 /// kinds of widgets, like [RenderObjectWidget]s).
+/// - It is a descendant of a [Scrollable].
 ///
 /// See also:
 ///
 ///  * [MaxGap], a gap that can take, at most, the amount of space specified.
 ///  * [SliverGap], the sliver version of this widget.
-class Gap extends LeafRenderObjectWidget {
-  /// Creates a widget that takes a fixed [mainAxisExtent] of space in
-  /// a [Row], [Column], or [Flex] widget.
+class Gap extends StatelessWidget {
+  /// Creates a widget that takes a fixed [mainAxisExtent] of space in the
+  /// direction of its parent.
   ///
   /// The [mainAxisExtent] must not be null and must be positive.
   /// The [crossAxisExtent] must be either null or positive.
@@ -31,9 +32,8 @@ class Gap extends LeafRenderObjectWidget {
         assert(crossAxisExtent == null || crossAxisExtent >= 0),
         super(key: key);
 
-  /// Creates a widget that takes a fixed [mainAxisExtent] of space in
-  /// a [Row], [Column], or [Flex] widget and expands in the cross axis
-  /// direction.
+  /// Creates a widget that takes a fixed [mainAxisExtent] of space in the
+  /// direction of its parent and expands in the cross axis direction.
   ///
   /// The [mainAxisExtent] must not be null and must be positive.
   const Gap.expand(
@@ -47,10 +47,11 @@ class Gap extends LeafRenderObjectWidget {
           color: color,
         );
 
-  /// The amount of space this widget takes in the direction of the parent.
+  /// The amount of space this widget takes in the direction of its parent.
   ///
-  /// If the parent is a [Column] this is the height of this widget.
-  /// If the parent is a [Row] this is the width of this widget.
+  /// For example:
+  /// - If the parent is a [Column] this is the height of this widget.
+  /// - If the parent is a [Row] this is the width of this widget.
   ///
   /// Must not be null and must be positive.
   final double mainAxisExtent;
@@ -58,8 +59,9 @@ class Gap extends LeafRenderObjectWidget {
   /// The amount of space this widget takes in the opposite direction of the
   /// parent.
   ///
-  /// If the parent is a [Column] this is the width of this widget.
-  /// If the parent is a [Row] this is the height of this widget.
+  /// For example:
+  /// - If the parent is a [Column] this is the width of this widget.
+  /// - If the parent is a [Row] this is the height of this widget.
   ///
   /// Must be positive or null. If it's null (the default) the cross axis extent
   /// will be the same as the constraints of the parent in the opposite
@@ -70,29 +72,18 @@ class Gap extends LeafRenderObjectWidget {
   final Color color;
 
   @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderGap(
-      mainAxisExtent: mainAxisExtent,
-      crossAxisExtent: crossAxisExtent ?? 0,
+  Widget build(BuildContext context) {
+    final ScrollableState scrollableState = Scrollable.of(context);
+    final AxisDirection axisDirection = scrollableState?.axisDirection;
+    final Axis fallbackDirection =
+        axisDirection == null ? null : axisDirectionToAxis(axisDirection);
+
+    return _RawGap(
+      mainAxisExtent,
+      crossAxisExtent: crossAxisExtent,
       color: color,
+      fallbackDirection: fallbackDirection,
     );
-  }
-
-  @override
-  void updateRenderObject(BuildContext context, RenderGap renderObject) {
-    renderObject
-      ..mainAxisExtent = mainAxisExtent
-      ..crossAxisExtent = crossAxisExtent ?? 0
-      ..color = color;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
-    properties.add(
-        DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
-    properties.add(ColorProperty('color', color));
   }
 }
 
@@ -162,11 +153,62 @@ class MaxGap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Gap(
+      child: _RawGap(
         mainAxisExtent,
         crossAxisExtent: crossAxisExtent,
         color: color,
       ),
     );
+  }
+}
+
+class _RawGap extends LeafRenderObjectWidget {
+  const _RawGap(
+    this.mainAxisExtent, {
+    Key key,
+    this.crossAxisExtent,
+    this.color,
+    this.fallbackDirection,
+  })  : assert(mainAxisExtent != null &&
+            mainAxisExtent >= 0 &&
+            mainAxisExtent < double.infinity),
+        assert(crossAxisExtent == null || crossAxisExtent >= 0),
+        super(key: key);
+
+  final double mainAxisExtent;
+
+  final double crossAxisExtent;
+
+  final Color color;
+
+  final Axis fallbackDirection;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return RenderGap(
+      mainAxisExtent: mainAxisExtent,
+      crossAxisExtent: crossAxisExtent ?? 0,
+      color: color,
+      fallbackDirection: fallbackDirection,
+    );
+  }
+
+  @override
+  void updateRenderObject(BuildContext context, RenderGap renderObject) {
+    renderObject
+      ..mainAxisExtent = mainAxisExtent
+      ..crossAxisExtent = crossAxisExtent ?? 0
+      ..color = color
+      ..fallbackDirection = fallbackDirection;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
+    properties.add(
+        DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
+    properties.add(ColorProperty('color', color));
+    properties.add(EnumProperty<Axis>('fallbackDirection', fallbackDirection));
   }
 }

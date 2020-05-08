@@ -5,10 +5,12 @@ class RenderGap extends RenderBox {
   RenderGap({
     double mainAxisExtent,
     double crossAxisExtent,
+    Axis fallbackDirection,
     Color color,
   })  : _mainAxisExtent = mainAxisExtent,
         _crossAxisExtent = crossAxisExtent,
-        _color = color;
+        _color = color,
+        _fallbackDirection = fallbackDirection;
 
   double get mainAxisExtent => _mainAxisExtent;
   double _mainAxisExtent;
@@ -25,6 +27,24 @@ class RenderGap extends RenderBox {
     if (_crossAxisExtent != value) {
       _crossAxisExtent = value;
       markNeedsLayout();
+    }
+  }
+
+  Axis get fallbackDirection => _fallbackDirection;
+  Axis _fallbackDirection;
+  set fallbackDirection(Axis value) {
+    if (_fallbackDirection != value) {
+      _fallbackDirection = value;
+      markNeedsLayout();
+    }
+  }
+
+  Axis get _direction {
+    final AbstractNode parentNode = parent;
+    if (parentNode is RenderFlex) {
+      return parentNode.direction;
+    } else {
+      return fallbackDirection;
     }
   }
 
@@ -70,8 +90,8 @@ class RenderGap extends RenderBox {
   }
 
   double _computeIntrinsicExtent(Axis axis, double Function() compute) {
-    final AbstractNode parentNode = parent;
-    if (parentNode is RenderFlex && parentNode.direction == axis) {
+    final Axis direction = _direction;
+    if (direction == axis) {
       return _mainAxisExtent;
     } else {
       if (_crossAxisExtent.isFinite) {
@@ -84,16 +104,18 @@ class RenderGap extends RenderBox {
 
   @override
   void performLayout() {
-    final AbstractNode flex = parent;
-    if (flex is RenderFlex) {
-      if (flex.direction == Axis.horizontal) {
+    final Axis direction = _direction;
+
+    if (direction != null) {
+      if (direction == Axis.horizontal) {
         size = constraints.constrain(Size(mainAxisExtent, crossAxisExtent));
       } else {
         size = constraints.constrain(Size(crossAxisExtent, mainAxisExtent));
       }
     } else {
       throw FlutterError(
-        'A Gap widget must be placed directly inside a Flex widget',
+        'A Gap widget must be placed directly inside a Flex widget '
+        'or its fallbackDirection must not be null',
       );
     }
   }
@@ -112,5 +134,6 @@ class RenderGap extends RenderBox {
     properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
     properties.add(DoubleProperty('crossAxisExtent', crossAxisExtent));
     properties.add(ColorProperty('color', color));
+    properties.add(EnumProperty<Axis>('fallbackDirection', fallbackDirection));
   }
 }
