@@ -13,11 +13,9 @@ class SliverGap extends LeafRenderObjectWidget {
   /// The [mainAxisExtent] must not be null and must be positive.
   const SliverGap(
     this.mainAxisExtent, {
-    Key key,
+    Key? key,
     this.color,
-  })  : assert(mainAxisExtent != null &&
-            mainAxisExtent >= 0 &&
-            mainAxisExtent < double.infinity),
+  })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         super(key: key);
 
   /// The amount of space this widget takes in the direction of the parent.
@@ -26,7 +24,7 @@ class SliverGap extends LeafRenderObjectWidget {
   final double mainAxisExtent;
 
   /// The color used to fill the gap.
-  final Color color;
+  final Color? color;
 
   @override
   RenderObject createRenderObject(BuildContext context) {

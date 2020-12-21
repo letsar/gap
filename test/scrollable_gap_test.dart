@@ -83,10 +83,10 @@ void main() {
             width: 200,
             child: SingleChildScrollView(
                 child: Row(
-                  children: const <Widget>[
-                    Gap(100),
-                  ],
-                )),
+              children: const <Widget>[
+                Gap(100),
+              ],
+            )),
           ),
         ),
       ),

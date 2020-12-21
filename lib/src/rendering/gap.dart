@@ -3,44 +3,44 @@ import 'package:flutter/rendering.dart';
 
 class RenderGap extends RenderBox {
   RenderGap({
-    double mainAxisExtent,
-    double crossAxisExtent,
-    Axis fallbackDirection,
-    Color color,
+    double? mainAxisExtent,
+    double? crossAxisExtent,
+    Axis? fallbackDirection,
+    Color? color,
   })  : _mainAxisExtent = mainAxisExtent,
         _crossAxisExtent = crossAxisExtent,
         _color = color,
         _fallbackDirection = fallbackDirection;
 
-  double get mainAxisExtent => _mainAxisExtent;
-  double _mainAxisExtent;
-  set mainAxisExtent(double value) {
+  double? get mainAxisExtent => _mainAxisExtent;
+  double? _mainAxisExtent;
+  set mainAxisExtent(double? value) {
     if (_mainAxisExtent != value) {
       _mainAxisExtent = value;
       markNeedsLayout();
     }
   }
 
-  double get crossAxisExtent => _crossAxisExtent;
-  double _crossAxisExtent;
-  set crossAxisExtent(double value) {
+  double? get crossAxisExtent => _crossAxisExtent;
+  double? _crossAxisExtent;
+  set crossAxisExtent(double? value) {
     if (_crossAxisExtent != value) {
       _crossAxisExtent = value;
       markNeedsLayout();
     }
   }
 
-  Axis get fallbackDirection => _fallbackDirection;
-  Axis _fallbackDirection;
-  set fallbackDirection(Axis value) {
+  Axis? get fallbackDirection => _fallbackDirection;
+  Axis? _fallbackDirection;
+  set fallbackDirection(Axis? value) {
     if (_fallbackDirection != value) {
       _fallbackDirection = value;
       markNeedsLayout();
     }
   }
 
-  Axis get _direction {
-    final AbstractNode parentNode = parent;
+  Axis? get _direction {
+    final AbstractNode? parentNode = parent;
     if (parentNode is RenderFlex) {
       return parentNode.direction;
     } else {
@@ -48,9 +48,9 @@ class RenderGap extends RenderBox {
     }
   }
 
-  Color get color => _color;
-  Color _color;
-  set color(Color value) {
+  Color? get color => _color;
+  Color? _color;
+  set color(Color? value) {
     if (_color != value) {
       _color = value;
       markNeedsPaint();
@@ -62,7 +62,7 @@ class RenderGap extends RenderBox {
     return _computeIntrinsicExtent(
       Axis.horizontal,
       () => super.computeMinIntrinsicWidth(height),
-    );
+    )!;
   }
 
   @override
@@ -70,7 +70,7 @@ class RenderGap extends RenderBox {
     return _computeIntrinsicExtent(
       Axis.horizontal,
       () => super.computeMaxIntrinsicWidth(height),
-    );
+    )!;
   }
 
   @override
@@ -78,7 +78,7 @@ class RenderGap extends RenderBox {
     return _computeIntrinsicExtent(
       Axis.vertical,
       () => super.computeMinIntrinsicHeight(width),
-    );
+    )!;
   }
 
   @override
@@ -86,15 +86,15 @@ class RenderGap extends RenderBox {
     return _computeIntrinsicExtent(
       Axis.vertical,
       () => super.computeMaxIntrinsicHeight(width),
-    );
+    )!;
   }
 
-  double _computeIntrinsicExtent(Axis axis, double Function() compute) {
-    final Axis direction = _direction;
+  double? _computeIntrinsicExtent(Axis axis, double Function() compute) {
+    final Axis? direction = _direction;
     if (direction == axis) {
       return _mainAxisExtent;
     } else {
-      if (_crossAxisExtent.isFinite) {
+      if (_crossAxisExtent!.isFinite) {
         return _crossAxisExtent;
       } else {
         return compute();
@@ -104,13 +104,13 @@ class RenderGap extends RenderBox {
 
   @override
   void performLayout() {
-    final Axis direction = _direction;
+    final Axis? direction = _direction;
 
     if (direction != null) {
       if (direction == Axis.horizontal) {
-        size = constraints.constrain(Size(mainAxisExtent, crossAxisExtent));
+        size = constraints.constrain(Size(mainAxisExtent!, crossAxisExtent!));
       } else {
-        size = constraints.constrain(Size(crossAxisExtent, mainAxisExtent));
+        size = constraints.constrain(Size(crossAxisExtent!, mainAxisExtent!));
       }
     } else {
       throw FlutterError(
@@ -123,7 +123,7 @@ class RenderGap extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     if (color != null) {
-      final Paint paint = Paint()..color = color;
+      final Paint paint = Paint()..color = color!;
       context.canvas.drawRect(offset & size, paint);
     }
   }

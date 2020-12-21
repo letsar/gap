@@ -30,8 +30,8 @@ void main() {
     );
 
     final RenderSliver sliver = tester.renderObject(find.byType(SliverGap));
-    expect(sliver.geometry.layoutExtent, 100);
-    expect(sliver.geometry.paintExtent, 100);
+    expect(sliver.geometry!.layoutExtent, 100);
+    expect(sliver.geometry!.paintExtent, 100);
   });
 
   testWidgets('Vertical SliverGap layoutExtent', (WidgetTester tester) async {
@@ -47,7 +47,7 @@ void main() {
     );
 
     final RenderSliver sliver = tester.renderObject(find.byType(SliverGap));
-    expect(sliver.geometry.layoutExtent, 100);
-    expect(sliver.geometry.paintExtent, 100);
+    expect(sliver.geometry!.layoutExtent, 100);
+    expect(sliver.geometry!.paintExtent, 100);
   });
 }
