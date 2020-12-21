@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 
 class RenderGap extends RenderBox {
   RenderGap({
-    double? mainAxisExtent,
+    required double mainAxisExtent,
     double? crossAxisExtent,
     Axis? fallbackDirection,
     Color? color,
@@ -12,9 +12,9 @@ class RenderGap extends RenderBox {
         _color = color,
         _fallbackDirection = fallbackDirection;
 
-  double? get mainAxisExtent => _mainAxisExtent;
-  double? _mainAxisExtent;
-  set mainAxisExtent(double? value) {
+  double get mainAxisExtent => _mainAxisExtent;
+  double _mainAxisExtent;
+  set mainAxisExtent(double value) {
     if (_mainAxisExtent != value) {
       _mainAxisExtent = value;
       markNeedsLayout();
@@ -108,9 +108,9 @@ class RenderGap extends RenderBox {
 
     if (direction != null) {
       if (direction == Axis.horizontal) {
-        size = constraints.constrain(Size(mainAxisExtent!, crossAxisExtent!));
+        size = constraints.constrain(Size(mainAxisExtent, crossAxisExtent!));
       } else {
-        size = constraints.constrain(Size(crossAxisExtent!, mainAxisExtent!));
+        size = constraints.constrain(Size(crossAxisExtent!, mainAxisExtent));
       }
     } else {
       throw FlutterError(

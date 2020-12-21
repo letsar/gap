@@ -2,14 +2,14 @@ import 'package:flutter/rendering.dart';
 
 class RenderSliverGap extends RenderSliver {
   RenderSliverGap({
-    double? mainAxisExtent,
+    required double mainAxisExtent,
     Color? color,
   })  : _mainAxisExtent = mainAxisExtent,
         _color = color;
 
-  double? get mainAxisExtent => _mainAxisExtent;
-  double? _mainAxisExtent;
-  set mainAxisExtent(double? value) {
+  double get mainAxisExtent => _mainAxisExtent;
+  double _mainAxisExtent;
+  set mainAxisExtent(double value) {
     if (_mainAxisExtent != value) {
       _mainAxisExtent = value;
       markNeedsLayout();
@@ -30,23 +30,23 @@ class RenderSliverGap extends RenderSliver {
     final double paintExtent = calculatePaintOffset(
       constraints,
       from: 0,
-      to: mainAxisExtent!,
+      to: mainAxisExtent,
     );
     final double cacheExtent = calculateCacheOffset(
       constraints,
       from: 0,
-      to: mainAxisExtent!,
+      to: mainAxisExtent,
     );
 
     assert(paintExtent.isFinite);
     assert(paintExtent >= 0.0);
     geometry = SliverGeometry(
-      scrollExtent: mainAxisExtent!,
+      scrollExtent: mainAxisExtent,
       paintExtent: paintExtent,
       cacheExtent: cacheExtent,
-      maxPaintExtent: mainAxisExtent!,
+      maxPaintExtent: mainAxisExtent,
       hitTestExtent: paintExtent,
-      hasVisualOverflow: mainAxisExtent! > constraints.remainingPaintExtent ||
+      hasVisualOverflow: mainAxisExtent > constraints.remainingPaintExtent ||
           constraints.scrollOffset > 0.0,
     );
   }
