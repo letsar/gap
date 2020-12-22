@@ -23,12 +23,10 @@ class Gap extends StatelessWidget {
   /// The [crossAxisExtent] must be either null or positive.
   const Gap(
     this.mainAxisExtent, {
-    Key key,
+    Key? key,
     this.crossAxisExtent,
     this.color,
-  })  : assert(mainAxisExtent != null &&
-            mainAxisExtent >= 0 &&
-            mainAxisExtent < double.infinity),
+  })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         assert(crossAxisExtent == null || crossAxisExtent >= 0),
         super(key: key);
 
@@ -38,8 +36,8 @@ class Gap extends StatelessWidget {
   /// The [mainAxisExtent] must not be null and must be positive.
   const Gap.expand(
     double mainAxisExtent, {
-    Key key,
-    Color color,
+    Key? key,
+    Color? color,
   }) : this(
           mainAxisExtent,
           key: key,
@@ -66,16 +64,16 @@ class Gap extends StatelessWidget {
   /// Must be positive or null. If it's null (the default) the cross axis extent
   /// will be the same as the constraints of the parent in the opposite
   /// direction.
-  final double crossAxisExtent;
+  final double? crossAxisExtent;
 
   /// The color used to fill the gap.
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    final ScrollableState scrollableState = Scrollable.of(context);
-    final AxisDirection axisDirection = scrollableState?.axisDirection;
-    final Axis fallbackDirection =
+    final ScrollableState? scrollableState = Scrollable.of(context);
+    final AxisDirection? axisDirection = scrollableState?.axisDirection;
+    final Axis? fallbackDirection =
         axisDirection == null ? null : axisDirectionToAxis(axisDirection);
 
     return _RawGap(
@@ -106,7 +104,7 @@ class MaxGap extends StatelessWidget {
   /// The [crossAxisExtent] must be either null or positive.
   const MaxGap(
     this.mainAxisExtent, {
-    Key key,
+    Key? key,
     this.crossAxisExtent,
     this.color,
   }) : super(key: key);
@@ -119,8 +117,8 @@ class MaxGap extends StatelessWidget {
   /// The [crossAxisExtent] must be either null or positive.
   const MaxGap.expand(
     double mainAxisExtent, {
-    Key key,
-    Color color,
+    Key? key,
+    Color? color,
   }) : this(
           mainAxisExtent,
           key: key,
@@ -145,10 +143,10 @@ class MaxGap extends StatelessWidget {
   /// Must be positive or null. If it's null (the default) the cross axis extent
   /// will be the same as the constraints of the parent in the opposite
   /// direction.
-  final double crossAxisExtent;
+  final double? crossAxisExtent;
 
   /// The color used to fill the gap.
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -165,23 +163,21 @@ class MaxGap extends StatelessWidget {
 class _RawGap extends LeafRenderObjectWidget {
   const _RawGap(
     this.mainAxisExtent, {
-    Key key,
+    Key? key,
     this.crossAxisExtent,
     this.color,
     this.fallbackDirection,
-  })  : assert(mainAxisExtent != null &&
-            mainAxisExtent >= 0 &&
-            mainAxisExtent < double.infinity),
+  })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         assert(crossAxisExtent == null || crossAxisExtent >= 0),
         super(key: key);
 
   final double mainAxisExtent;
 
-  final double crossAxisExtent;
+  final double? crossAxisExtent;
 
-  final Color color;
+  final Color? color;
 
-  final Axis fallbackDirection;
+  final Axis? fallbackDirection;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
