@@ -36,7 +36,6 @@ void main() {
           child: SizedBox(
             width: 200,
             child: ListView(
-              scrollDirection: Axis.vertical,
               children: const <Widget>[
                 Gap(100),
               ],
@@ -60,7 +59,6 @@ void main() {
           child: SizedBox(
             width: 200,
             child: ListView(
-              scrollDirection: Axis.vertical,
               children: const <Widget>[
                 Gap(100, crossAxisExtent: 20),
               ],
@@ -84,12 +82,11 @@ void main() {
           child: SizedBox(
             width: 200,
             child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
                 child: Row(
-                  children: const <Widget>[
-                    Gap(100),
-                  ],
-                )),
+              children: const <Widget>[
+                Gap(100),
+              ],
+            )),
           ),
         ),
       ),
