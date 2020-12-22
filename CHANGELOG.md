@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.1
+### Added
+- Null safety
+
 ## 1.2.0
 ### Added
 - Compatibility with `Scrollable` widgets (such as `ListViews`).
