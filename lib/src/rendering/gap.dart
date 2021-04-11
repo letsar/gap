@@ -103,14 +103,14 @@ class RenderGap extends RenderBox {
   }
 
   @override
-  void performLayout() {
+  Size computeDryLayout(BoxConstraints constraints) {
     final Axis? direction = _direction;
 
     if (direction != null) {
       if (direction == Axis.horizontal) {
-        size = constraints.constrain(Size(mainAxisExtent, crossAxisExtent!));
+        return constraints.constrain(Size(mainAxisExtent, crossAxisExtent!));
       } else {
-        size = constraints.constrain(Size(crossAxisExtent!, mainAxisExtent));
+        return constraints.constrain(Size(crossAxisExtent!, mainAxisExtent));
       }
     } else {
       throw FlutterError(
@@ -118,6 +118,11 @@ class RenderGap extends RenderBox {
         'or its fallbackDirection must not be null',
       );
     }
+  }
+
+  @override
+  void performLayout() {
+    size = computeDryLayout(constraints);
   }
 
   @override
