@@ -33,19 +33,21 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            const Gap.expand(20, color: Colors.red),
+            const Gap.expand(20, thickness: 20, color: Colors.red),
             const Gap(80),
-            const Gap.expand(20, color: Colors.red),
-            const MaxGap(2000),
-            const Gap.expand(20, color: Colors.red),
+            const Gap.expand(20, thickness: 20, color: Colors.red),
+            const Flexible(child: Gap(2000)),
+            const Gap.expand(20, thickness: 20, color: Colors.red),
             Row(
               children: const <Widget>[
-                Gap(20, color: Colors.green, crossAxisExtent: 20),
+                Gap(20,
+                    thickness: 20, color: Colors.green, crossAxisExtent: 20),
                 Gap(50),
-                Gap(20, color: Colors.green, crossAxisExtent: 20),
+                Gap(20,
+                    thickness: 20, color: Colors.green, crossAxisExtent: 20),
               ],
             ),
-            const Gap.expand(200, color: Colors.blue),
+            const Gap.expand(200, thickness: 200, color: Colors.blue),
           ],
         ),
       ),
