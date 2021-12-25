@@ -4,13 +4,19 @@ import 'package:flutter/rendering.dart';
 class RenderGap extends RenderBox {
   RenderGap({
     required double mainAxisExtent,
-    double? crossAxisExtent,
+    required double crossAxisExtent,
     Axis? fallbackDirection,
     Color? color,
+    required double thickness,
+    required double indent,
+    required double endIndent,
   })  : _mainAxisExtent = mainAxisExtent,
         _crossAxisExtent = crossAxisExtent,
         _color = color,
-        _fallbackDirection = fallbackDirection;
+        _fallbackDirection = fallbackDirection,
+        _thickness = thickness,
+        _indent = indent,
+        _endIndent = endIndent;
 
   double get mainAxisExtent => _mainAxisExtent;
   double _mainAxisExtent;
@@ -56,6 +62,33 @@ class RenderGap extends RenderBox {
   set color(Color? value) {
     if (_color != value) {
       _color = value;
+      markNeedsPaint();
+    }
+  }
+
+  double get thickness => _thickness;
+  double _thickness;
+  set thickness(double value) {
+    if (_thickness != value) {
+      _thickness = value;
+      markNeedsPaint();
+    }
+  }
+
+  double get indent => _indent;
+  double _indent;
+  set indent(double value) {
+    if (_indent != value) {
+      _indent = value;
+      markNeedsPaint();
+    }
+  }
+
+  double get endIndent => _endIndent;
+  double _endIndent;
+  set endIndent(double value) {
+    if (_endIndent != value) {
+      _endIndent = value;
       markNeedsPaint();
     }
   }
@@ -131,8 +164,42 @@ class RenderGap extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     if (color != null) {
-      final Paint paint = Paint()..color = color!;
-      context.canvas.drawRect(offset & size, paint);
+      final Paint paint = Paint()
+        ..strokeWidth = 0.0
+        ..color = color!;
+      final Axis direction = _direction!;
+      final Rect temp = offset & size;
+      final Path path = Path();
+      if (direction == Axis.horizontal) {
+        final rect = Rect.fromLTRB(
+            temp.center.dx - thickness / 2.0,
+            temp.top + indent,
+            temp.center.dx + thickness / 2.0,
+            temp.bottom - endIndent);
+        if (thickness == 0.0) {
+          paint.style = PaintingStyle.stroke;
+          path.moveTo(rect.topCenter.dx, rect.topCenter.dy);
+          path.lineTo(rect.bottomCenter.dx, rect.bottomCenter.dy);
+        } else {
+          paint.style = PaintingStyle.fill;
+          path.addRect(rect);
+        }
+      } else {
+        final rect = Rect.fromLTRB(
+            temp.left + indent,
+            temp.center.dy - thickness / 2.0,
+            temp.right - endIndent,
+            temp.center.dy + thickness / 2.0);
+        if (thickness == 0.0) {
+          paint.style = PaintingStyle.stroke;
+          path.moveTo(rect.centerLeft.dx, rect.centerLeft.dy);
+          path.lineTo(rect.centerRight.dx, rect.centerRight.dy);
+        } else {
+          paint.style = PaintingStyle.fill;
+          path.addRect(rect);
+        }
+      }
+      context.canvas.drawPath(path, paint);
     }
   }
 
@@ -143,5 +210,8 @@ class RenderGap extends RenderBox {
     properties.add(DoubleProperty('crossAxisExtent', crossAxisExtent));
     properties.add(ColorProperty('color', color));
     properties.add(EnumProperty<Axis>('fallbackDirection', fallbackDirection));
+    properties.add(DoubleProperty('thickness', thickness));
+    properties.add(DoubleProperty('indent', indent));
+    properties.add(DoubleProperty('endIndent', endIndent));
   }
 }

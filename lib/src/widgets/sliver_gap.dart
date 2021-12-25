@@ -15,7 +15,13 @@ class SliverGap extends LeafRenderObjectWidget {
     this.mainAxisExtent, {
     Key? key,
     this.color,
+    this.thickness,
+    this.indent,
+    this.endIndent,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
+        assert(thickness == null || thickness >= 0.0),
+        assert(indent == null || indent >= 0.0),
+        assert(endIndent == null || endIndent >= 0.0),
         super(key: key);
 
   /// The amount of space this widget takes in the direction of the parent.
@@ -26,11 +32,32 @@ class SliverGap extends LeafRenderObjectWidget {
   /// The color used to fill the gap.
   final Color? color;
 
+  /// The thickness of the line drawn within the gap.
+  ///
+  /// A gap with a [thickness] of 0.0 is always drawn as a line with a
+  /// width of exactly one device pixel.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? thickness;
+
+  /// the amount of empty space to the leading edge of the gap.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? indent;
+
+  /// The amount of empty space to the trailing edge of the gap.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? endIndent;
+
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderSliverGap(
       mainAxisExtent: mainAxisExtent,
       color: color,
+      thickness: thickness ?? 0,
+      indent: indent ?? 0,
+      endIndent: endIndent ?? 0,
     );
   }
 
@@ -38,7 +65,10 @@ class SliverGap extends LeafRenderObjectWidget {
   void updateRenderObject(BuildContext context, RenderSliverGap renderObject) {
     renderObject
       ..mainAxisExtent = mainAxisExtent
-      ..color = color;
+      ..color = color
+      ..thickness = thickness ?? 0
+      ..indent = indent ?? 0
+      ..endIndent = endIndent ?? 0;
   }
 
   @override
@@ -46,5 +76,8 @@ class SliverGap extends LeafRenderObjectWidget {
     super.debugFillProperties(properties);
     properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
     properties.add(ColorProperty('color', color));
+    properties.add(DoubleProperty('thickness', thickness));
+    properties.add(DoubleProperty('indent', indent));
+    properties.add(DoubleProperty('endIndent', endIndent));
   }
 }

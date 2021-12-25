@@ -28,8 +28,14 @@ class Gap extends StatelessWidget {
     this.fallbackDirection,
     this.crossAxisExtent,
     this.color,
+    this.thickness,
+    this.indent,
+    this.endIndent,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         assert(crossAxisExtent == null || crossAxisExtent >= 0),
+        assert(thickness == null || thickness >= 0.0),
+        assert(indent == null || indent >= 0.0),
+        assert(endIndent == null || endIndent >= 0.0),
         super(key: key);
 
   /// Creates a widget that takes a fixed [mainAxisExtent] of space in the
@@ -41,12 +47,18 @@ class Gap extends StatelessWidget {
     Key? key,
     Axis? fallbackDirection,
     Color? color,
+    double? thickness,
+    double? indent,
+    double? endIndent,
   }) : this(
           mainAxisExtent,
           key: key,
           fallbackDirection: fallbackDirection,
           crossAxisExtent: double.infinity,
           color: color,
+          thickness: thickness,
+          indent: indent,
+          endIndent: endIndent,
         );
 
   /// The amount of space this widget takes in the direction of its ancestors.
@@ -76,6 +88,24 @@ class Gap extends StatelessWidget {
   /// The direction to use when its ancestors is not a [Flex] widget.
   final Axis? fallbackDirection;
 
+  /// The thickness of the line drawn within the gap.
+  ///
+  /// A gap with a [thickness] of 0.0 is always drawn as a line with a
+  /// width of exactly one device pixel.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? thickness;
+
+  /// The amount of empty space to the leading edge of the gap.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? indent;
+
+  /// The amount of empty space to the trailing edge of the gap.
+  ///
+  /// If this is null, defaults to 0.0.
+  final double? endIndent;
+
   @override
   Widget build(BuildContext context) {
     return _RawGap(
@@ -83,6 +113,9 @@ class Gap extends StatelessWidget {
       crossAxisExtent: crossAxisExtent,
       color: color,
       fallbackDirection: fallbackDirection,
+      thickness: thickness,
+      indent: indent,
+      endIndent: endIndent,
     );
   }
 }
@@ -94,8 +127,14 @@ class _RawGap extends LeafRenderObjectWidget {
     this.crossAxisExtent,
     this.color,
     this.fallbackDirection,
+    this.thickness,
+    this.indent,
+    this.endIndent,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         assert(crossAxisExtent == null || crossAxisExtent >= 0),
+        assert(thickness == null || thickness >= 0),
+        assert(indent == null || indent >= 0),
+        assert(endIndent == null || endIndent >= 0),
         super(key: key);
 
   final double mainAxisExtent;
@@ -106,6 +145,12 @@ class _RawGap extends LeafRenderObjectWidget {
 
   final Axis? fallbackDirection;
 
+  final double? thickness;
+
+  final double? indent;
+
+  final double? endIndent;
+
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderGap(
@@ -113,6 +158,9 @@ class _RawGap extends LeafRenderObjectWidget {
       crossAxisExtent: crossAxisExtent ?? 0,
       color: color,
       fallbackDirection: fallbackDirection,
+      thickness: thickness ?? 0,
+      indent: indent ?? 0,
+      endIndent: endIndent ?? 0,
     );
   }
 
@@ -122,7 +170,10 @@ class _RawGap extends LeafRenderObjectWidget {
       ..mainAxisExtent = mainAxisExtent
       ..crossAxisExtent = crossAxisExtent ?? 0
       ..color = color
-      ..fallbackDirection = fallbackDirection;
+      ..fallbackDirection = fallbackDirection
+      ..thickness = thickness ?? 0
+      ..indent = indent ?? 0
+      ..endIndent = endIndent ?? 0;
   }
 
   @override
@@ -133,5 +184,8 @@ class _RawGap extends LeafRenderObjectWidget {
         DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
     properties.add(ColorProperty('color', color));
     properties.add(EnumProperty<Axis>('fallbackDirection', fallbackDirection));
+    properties.add(DoubleProperty('thickness', thickness));
+    properties.add(DoubleProperty('indent', indent));
+    properties.add(DoubleProperty('endIndent', endIndent));
   }
 }
