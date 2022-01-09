@@ -5,13 +5,13 @@ import 'package:gap/src/widgets/sliver_gap.dart';
 
 /// Animated version of [SliverGap] that gradually changes its values over a period of time.
 ///
-/// The [AnimatedGap] will automatically animate between the old and
+/// The [SliverAnimatedGap] will automatically animate between the old and
 /// new values of properties when they change using the provided curve and
 /// duration. Properties that are null are not animated.
 ///
 /// See also:
 ///
-///  * [SliverAnimatedGap], the [SliverGap] version of this widget.
+///  * [AnimatedGap], the [RenderBox] version of this widget.
 class SliverAnimatedGap extends ImplicitlyAnimatedWidget {
   /// Creates a [SliverGap] that animates its parameters implicitly.
   ///

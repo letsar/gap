@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/src/widgets/gap.dart';
+import 'package:gap/src/widgets/sliver_animated_gap.dart';
 
 /// Animated version of [Gap] that gradually changes its values over a period of time.
 ///
@@ -11,7 +13,7 @@ import 'package:gap/src/widgets/gap.dart';
 ///
 /// See also:
 ///
-///  * [SliverAnimatedGap], the [SliverGap] version of this widget.
+///  * [SliverAnimatedGap], the [RenderSliver] version of this widget.
 class AnimatedGap extends ImplicitlyAnimatedWidget {
   /// Creates a [Gap] that animates its parameters implicitly.
   ///
