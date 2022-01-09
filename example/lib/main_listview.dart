@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   /// Creates a [HomePage].
   const HomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -46,8 +46,8 @@ class HomePage extends StatelessWidget {
 class _Body extends StatelessWidget {
   /// Creates a [_Body].
   const _Body({
-    Key key,
-    this.axis,
+    Key? key,
+    required this.axis,
   }) : super(key: key);
 
   final Axis axis;
@@ -72,8 +72,8 @@ class _Body extends StatelessWidget {
 
 class _Gap extends StatelessWidget {
   const _Gap({
-    Key key,
-    this.color,
+    Key? key,
+   required  this.color,
   }) : super(key: key);
 
   final Color color;

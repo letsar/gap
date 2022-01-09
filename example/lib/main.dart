@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   /// Creates a [HomePage].
   const HomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
