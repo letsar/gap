@@ -31,16 +31,10 @@ class SliverAnimatedGap extends ImplicitlyAnimatedWidget {
           onEnd: onEnd,
         );
 
-  /// The amount of space this widget takes in the direction of its parent.
-  ///
-  /// For example:
-  /// - If the parent is a [Column] this is the height of this widget.
-  /// - If the parent is a [Row] this is the width of this widget.
-  ///
-  /// Must not be null and must be positive.
+  /// {@macro sliverGap.mainAxisExtent}
   final double mainAxisExtent;
 
-  /// The color used to fill the gap.
+  /// {@macro sliverGap.color}
   final Color? color;
 
   @override
@@ -78,12 +72,12 @@ class _SliverAnimatedGapState
   @override
   Widget build(BuildContext context) {
     final mainAxisExtent =
-        _mainAxisExtent!.evaluate(animation).clamp(0.0, double.infinity);
+        _mainAxisExtent?.evaluate(animation).clamp(0.0, double.infinity);
 
     final color = _color?.evaluate(animation);
 
     return SliverGap(
-      mainAxisExtent,
+      mainAxisExtent ?? 0,
       color: color,
     );
   }

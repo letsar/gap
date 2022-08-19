@@ -35,28 +35,13 @@ class AnimatedGap extends ImplicitlyAnimatedWidget {
           onEnd: onEnd,
         );
 
-  /// The amount of space this widget takes in the direction of its parent.
-  ///
-  /// For example:
-  /// - If the parent is a [Column] this is the height of this widget.
-  /// - If the parent is a [Row] this is the width of this widget.
-  ///
-  /// Must not be null and must be positive.
+  /// {@macro gap.mainAxisExtent}
   final double mainAxisExtent;
 
-  /// The amount of space this widget takes in the opposite direction of the
-  /// parent.
-  ///
-  /// For example:
-  /// - If the parent is a [Column] this is the width of this widget.
-  /// - If the parent is a [Row] this is the height of this widget.
-  ///
-  /// Must be positive or null. If it's null (the default) the cross axis extent
-  /// will be the same as the constraints of the parent in the opposite
-  /// direction.
+  /// {@macro gap.crossAxisExtent}
   final double? crossAxisExtent;
 
-  /// The color used to fill the gap.
+  /// {@macro gap.color}
   final Color? color;
 
   @override
@@ -102,7 +87,7 @@ class _AnimatedGapState extends AnimatedWidgetBaseState<AnimatedGap> {
   @override
   Widget build(BuildContext context) {
     final mainAxisExtent =
-        _mainAxisExtent!.evaluate(animation).clamp(0.0, double.infinity);
+        _mainAxisExtent?.evaluate(animation).clamp(0.0, double.infinity);
 
     final crossAxisExtent =
         _crossAxisExtent?.evaluate(animation).clamp(0.0, double.infinity);
@@ -110,7 +95,7 @@ class _AnimatedGapState extends AnimatedWidgetBaseState<AnimatedGap> {
     final color = _color?.evaluate(animation);
 
     return Gap(
-      mainAxisExtent,
+      mainAxisExtent ?? 0,
       crossAxisExtent: crossAxisExtent,
       color: color,
     );
