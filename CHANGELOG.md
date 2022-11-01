@@ -1,3 +1,7 @@
+## 2.1.0-dev.0
+### Fixed
+- Scrollable breaking change
+
 ## 2.0.0
 ### Added
 - Null safety
