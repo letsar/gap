@@ -1,3 +1,7 @@
+## 2.0.1
+### Fixed
+- Issue with Scrollable.of in master channel
+
 ## 2.0.0
 ### Added
 - Null safety
