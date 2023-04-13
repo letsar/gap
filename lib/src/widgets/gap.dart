@@ -71,18 +71,10 @@ class Gap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollableState? scrollableState;
-    try {
-      // TODO: call Scrollable.maybeOf when available on stable.
-      scrollableState = Scrollable.of(context);
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      scrollableState = null;
-    }
+    final ScrollableState? scrollableState = Scrollable.maybeOf(context);
 
     final AxisDirection? axisDirection = scrollableState?.axisDirection;
-    final Axis? fallbackDirection =
-        axisDirection == null ? null : axisDirectionToAxis(axisDirection);
+    final Axis? fallbackDirection = axisDirection == null ? null : axisDirectionToAxis(axisDirection);
 
     return _RawGap(
       mainAxisExtent,
@@ -210,8 +202,7 @@ class _RawGap extends LeafRenderObjectWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
-    properties.add(
-        DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
+    properties.add(DoubleProperty('crossAxisExtent', crossAxisExtent, defaultValue: 0));
     properties.add(ColorProperty('color', color));
     properties.add(EnumProperty<Axis>('fallbackDirection', fallbackDirection));
   }
