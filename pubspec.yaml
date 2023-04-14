@@ -1,6 +1,6 @@
 name: gap
 description: Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or scrolling views.
-version: 2.0.1
+version: 2.0.2
 homepage: https://github.com/letsar/gap
 
 environment:

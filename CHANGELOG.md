@@ -1,3 +1,7 @@
+## 2.0.2
+### Fixed
+- Use Scrollable.maybeOf instead of Scrollable.of
+
 ## 2.0.1
 ### Fixed
 - Issue with Scrollable.of in master channel
