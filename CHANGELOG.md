@@ -1,3 +1,7 @@
+## 3.0.0
+### Changed
+- Set minimum Flutter version to 3.7.0
+
 ## 2.0.2
 ### Fixed
 - Use Scrollable.maybeOf instead of Scrollable.of
