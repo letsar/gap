@@ -45,6 +45,7 @@ class Gap extends StatelessWidget {
           color: color,
         );
 
+  /// {@template gap.mainAxisExtent}
   /// The amount of space this widget takes in the direction of its parent.
   ///
   /// For example:
@@ -52,8 +53,10 @@ class Gap extends StatelessWidget {
   /// - If the parent is a [Row] this is the width of this widget.
   ///
   /// Must not be null and must be positive.
+  /// {@endtemplate}
   final double mainAxisExtent;
 
+  /// {@template gap.crossAxisExtent}
   /// The amount of space this widget takes in the opposite direction of the
   /// parent.
   ///
@@ -64,9 +67,12 @@ class Gap extends StatelessWidget {
   /// Must be positive or null. If it's null (the default) the cross axis extent
   /// will be the same as the constraints of the parent in the opposite
   /// direction.
+  /// {@endtemplate}
   final double? crossAxisExtent;
 
+  /// {@template gap.color}
   /// The color used to fill the gap.
+  /// {@endtemplate}
   final Color? color;
 
   @override
@@ -126,26 +132,13 @@ class MaxGap extends StatelessWidget {
           color: color,
         );
 
-  /// The amount of space this widget takes in the direction of the parent.
-  ///
-  /// If the parent is a [Column] this is the height of this widget.
-  /// If the parent is a [Row] this is the width of this widget.
-  ///
-  /// Must not be null and must be positive.
+  /// {@macro gap.mainAxisExtent}
   final double mainAxisExtent;
 
-  /// The amount of space this widget takes in the opposite direction of the
-  /// parent.
-  ///
-  /// If the parent is a [Column] this is the width of this widget.
-  /// If the parent is a [Row] this is the height of this widget.
-  ///
-  /// Must be positive or null. If it's null (the default) the cross axis extent
-  /// will be the same as the constraints of the parent in the opposite
-  /// direction.
+  /// {@macro gap.crossAxisExtent}
   final double? crossAxisExtent;
 
-  /// The color used to fill the gap.
+  /// {@macro gap.color}
   final Color? color;
 
   @override
