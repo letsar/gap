@@ -5,8 +5,8 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,28 +24,28 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   /// Creates a [HomePage].
   const HomePage({
-    Key key,
-  }) : super(key: key);
+   super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            const Gap.expand(20, color: Colors.red),
-            const Gap(80),
-            const Gap.expand(20, color: Colors.red),
-            const MaxGap(2000),
-            const Gap.expand(20, color: Colors.red),
+             Gap.expand(20, color: Colors.red),
+             Gap(80),
+             Gap.expand(20, color: Colors.red),
+             MaxGap(2000),
+             Gap.expand(20, color: Colors.red),
             Row(
-              children: const <Widget>[
+              children:  <Widget>[
                 Gap(20, color: Colors.green, crossAxisExtent: 20),
                 Gap(50),
                 Gap(20, color: Colors.green, crossAxisExtent: 20),
               ],
             ),
-            const Gap.expand(200, color: Colors.blue),
+             Gap.expand(200, color: Colors.blue),
           ],
         ),
       ),

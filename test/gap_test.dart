@@ -37,9 +37,9 @@ void main() {
 
   testWidgets('Gap size in a Row', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Row(
+      const Row(
         textDirection: TextDirection.ltr,
-        children: const <Widget>[
+        children: <Widget>[
           Gap(100, crossAxisExtent: 20),
         ],
       ),
@@ -52,9 +52,9 @@ void main() {
 
   testWidgets('Gap size in a Column', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Column(
+      const Column(
         textDirection: TextDirection.ltr,
-        children: const <Widget>[
+        children: <Widget>[
           Gap(100, crossAxisExtent: 20),
         ],
       ),
@@ -67,12 +67,12 @@ void main() {
 
   testWidgets('Gap.expand size in a Column', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Center(
+      const Center(
         child: SizedBox(
           width: 200,
           child: Column(
             textDirection: TextDirection.ltr,
-            children: const <Widget>[
+            children: <Widget>[
               Gap.expand(100),
             ],
           ),
@@ -87,9 +87,9 @@ void main() {
 
   testWidgets('MaxGap size in a Row', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Row(
+      const Row(
         textDirection: TextDirection.ltr,
-        children: const <Widget>[
+        children: <Widget>[
           MaxGap(100, crossAxisExtent: 20),
         ],
       ),
@@ -102,12 +102,12 @@ void main() {
 
   testWidgets('MaxGap size in a constrained Row', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Center(
+      const Center(
         child: SizedBox(
           width: 50,
           child: Row(
             textDirection: TextDirection.ltr,
-            children: const <Widget>[
+            children: <Widget>[
               MaxGap(100, crossAxisExtent: 20),
             ],
           ),
@@ -122,9 +122,9 @@ void main() {
 
   testWidgets('MaxGap size in a Column', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Column(
+      const Column(
         textDirection: TextDirection.ltr,
-        children: const <Widget>[
+        children: <Widget>[
           MaxGap(100, crossAxisExtent: 20),
         ],
       ),
@@ -138,12 +138,12 @@ void main() {
   testWidgets('MaxGap size in a constrained Column',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      Center(
+      const Center(
         child: SizedBox(
           height: 50,
           child: Column(
             textDirection: TextDirection.ltr,
-            children: const <Widget>[
+            children: <Widget>[
               MaxGap(100, crossAxisExtent: 20),
             ],
           ),
