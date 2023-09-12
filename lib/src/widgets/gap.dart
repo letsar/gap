@@ -107,6 +107,7 @@ class MaxGap extends StatelessWidget {
     Key? key,
     this.crossAxisExtent,
     this.color,
+    this.flex = 1,
   }) : super(key: key);
 
   /// Creates a widget that takes, at most, the specified [mainAxisExtent] of
@@ -119,11 +120,13 @@ class MaxGap extends StatelessWidget {
     double mainAxisExtent, {
     Key? key,
     Color? color,
+    int? flex,
   }) : this(
           mainAxisExtent,
           key: key,
           crossAxisExtent: double.infinity,
           color: color,
+          flex: flex,
         );
 
   /// The amount of space this widget takes in the direction of the parent.
@@ -148,9 +151,19 @@ class MaxGap extends StatelessWidget {
   /// The color used to fill the gap.
   final Color? color;
 
+  /// The flex factor to use in determining how much space to take up.
+  ///
+  /// The amount of space the [MaxGap] can occupy in the main axis is determined
+  /// by dividing the free space proportionately, after placing the inflexible
+  /// children, according to the flex factors of the flexible children.
+  ///
+  /// Defaults to one.
+  final int flex;
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
+      flex: flex,
       child: _RawGap(
         mainAxisExtent,
         crossAxisExtent: crossAxisExtent,
