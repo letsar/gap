@@ -176,4 +176,24 @@ void main() {
       ),
     );
   });
+
+  testWidgets('gap extension size in a Row', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          textDirection: TextDirection.ltr,
+          children: <Widget>[
+            const SizedBox.square(dimension: 10),
+            const SizedBox.square(dimension: 10),
+            const SizedBox.square(dimension: 10),
+          ].gap(10),
+        ),
+      ),
+    );
+
+    final RenderBox box = tester.renderObject(find.byType(Row));
+    expect(box.size.width, 50);
+    expect(box.size.height, 10);
+  });
 }
