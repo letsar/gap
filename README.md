@@ -60,6 +60,20 @@ return CustomScrollView(
 );
 ```
 
+### List<Widget> Extension
+
+You can also space a list of Widgets using the gap extension
+
+```dart
+return Row(
+  children: [
+    Icon(Icons.abc),
+    Icon(Icons.air),
+    Icon(Icons.add),
+  ].gap(10),
+);
+```
+
 ## Changelog
 
 Please see the [Changelog](https://github.com/letsar/gap/blob/master/CHANGELOG.md) page to know what's recently changed.
