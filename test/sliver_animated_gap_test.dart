@@ -124,7 +124,7 @@ void main() {
 
       expect(
         tester.firstWidget<SliverGap>(find.byType(SliverGap)).color,
-        const Color(0xFF7F7F7F),
+        Color.lerp(const Color(0xFFFFFFFF), const Color(0xFF000000), 0.5),
       );
 
       await tester.pump(_animationHalfDuration);

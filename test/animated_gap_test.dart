@@ -31,8 +31,8 @@ void main() {
       const double crossAxisExtentB = 35;
 
       await tester.pumpWidget(
-        Column(
-          children: const [
+        const Column(
+          children: [
             AnimatedGap(
               mainAxisExtentA,
               crossAxisExtent: crossAxisExtentA,
@@ -47,8 +47,8 @@ void main() {
       expect(box.size.width, crossAxisExtentA);
 
       await tester.pumpWidget(
-        Column(
-          children: const [
+        const Column(
+          children: [
             AnimatedGap(
               mainAxisExtentB,
               crossAxisExtent: crossAxisExtentB,
@@ -80,8 +80,8 @@ void main() {
     'AnimatedGap color animation',
     (WidgetTester tester) async {
       await tester.pumpWidget(
-        Column(
-          children: const [
+        const Column(
+          children: [
             AnimatedGap(
               10,
               color: Color(0xFFFFFFFF),
@@ -97,8 +97,8 @@ void main() {
       );
 
       await tester.pumpWidget(
-        Column(
-          children: const [
+        const Column(
+          children: [
             AnimatedGap(
               10,
               color: Color(0xFF000000),
@@ -117,7 +117,7 @@ void main() {
 
       expect(
         tester.firstWidget<Gap>(find.byType(Gap)).color,
-        const Color(0xFF7F7F7F),
+        Color.lerp(const Color(0xFFFFFFFF), const Color(0xFF000000), 0.5),
       );
 
       await tester.pump(_animationHalfDuration);
