@@ -18,12 +18,16 @@ class SliverGap extends LeafRenderObjectWidget {
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
         super(key: key);
 
+  /// {@template sliverGap.mainAxisExtent}
   /// The amount of space this widget takes in the direction of the parent.
   ///
   /// Must not be null and must be positive.
+  /// {@endtemplate}
   final double mainAxisExtent;
 
+  /// {@template sliverGap.color}
   /// The color used to fill the gap.
+  /// {@endtemplate}
   final Color? color;
 
   @override
