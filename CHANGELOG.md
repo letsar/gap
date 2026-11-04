@@ -1,3 +1,19 @@
+## 3.0.1
+### Changed
+- Remove the usage of AbstractNode so that it can be used in 3.12.0-8.0.pre.21 (See https://github.com/letsar/gap/issues/16)
+
+## 3.0.0
+### Changed
+- Set minimum Flutter version to 3.7.0
+
+## 2.0.2
+### Fixed
+- Use Scrollable.maybeOf instead of Scrollable.of
+
+## 2.0.1
+### Fixed
+- Issue with Scrollable.of in master channel
+
 ## 2.0.0
 ### Added
 - Null safety

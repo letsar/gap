@@ -22,3 +22,5 @@ doc/api/
 
 # VSCode
 .vscode/
+
+.fvm/

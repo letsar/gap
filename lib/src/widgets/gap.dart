@@ -77,7 +77,7 @@ class Gap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollableState? scrollableState = Scrollable.of(context);
+    final scrollableState = Scrollable.maybeOf(context);
     final AxisDirection? axisDirection = scrollableState?.axisDirection;
     final Axis? fallbackDirection =
         axisDirection == null ? null : axisDirectionToAxis(axisDirection);

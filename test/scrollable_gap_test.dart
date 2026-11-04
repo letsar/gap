@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:gap/gap.dart';
 
 void main() {
@@ -76,14 +75,14 @@ void main() {
   testWidgets('Gap inside a Row inside a SingleChildScrollView',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      Directionality(
+      const Directionality(
         textDirection: TextDirection.ltr,
         child: Center(
           child: SizedBox(
             width: 200,
             child: SingleChildScrollView(
                 child: Row(
-              children: const <Widget>[
+              children: <Widget>[
                 Gap(100),
               ],
             )),
