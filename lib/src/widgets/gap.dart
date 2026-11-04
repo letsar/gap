@@ -9,6 +9,8 @@ import 'package:gap/src/rendering/gap.dart';
 /// and the path from the [Gap] widget to its enclosing [Row], [Column], or
 /// [Flex] must contain only [StatelessWidget]s or [StatefulWidget]s (not other
 /// kinds of widgets, like [RenderObjectWidget]s).
+/// - It is a direct child of a [Wrap].
+/// - It is the child of a [WidgetSpan] (in which case it is horizontal).
 /// - It is a descendant of a [Scrollable].
 ///
 /// See also:
