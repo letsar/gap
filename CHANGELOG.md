@@ -1,7 +1,13 @@
-## Unreleased
+## 3.1.0
+### Added
+- `AnimatedGap` and `SliverAnimatedGap` (See https://github.com/letsar/gap/pull/8)
+
 ### Fixed
-- Gap can be used directly inside a `Wrap` (See https://github.com/letsar/gap/issues/22)
-- Gap can be used inside a `WidgetSpan` (See https://github.com/letsar/gap/issues/27)
+- Gap can be used directly inside a `Wrap` (See https://github.com/letsar/gap/issues/22). A Gap inside a Wrap inside a scrollable now follows the Wrap's direction instead of the scrollable's.
+- Gap can be used inside a `WidgetSpan` (See https://github.com/letsar/gap/issues/27). It is always horizontal there, even inside a vertical scrollable.
+
+### Changed
+- Documented how `MaxGap` shares space with other flexible children (See https://github.com/letsar/gap/pull/32)
 
 ## 3.0.1
 ### Changed
