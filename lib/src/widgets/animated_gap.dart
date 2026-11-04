@@ -25,7 +25,8 @@ class AnimatedGap extends ImplicitlyAnimatedWidget {
     required Duration duration,
     VoidCallback? onEnd,
   })  : assert(mainAxisExtent >= 0 && mainAxisExtent < double.infinity),
-        assert(crossAxisExtent == null || crossAxisExtent >= 0),
+        assert(crossAxisExtent == null ||
+            (crossAxisExtent >= 0 && crossAxisExtent < double.infinity)),
         super(
           key: key,
           curve: curve,

@@ -179,6 +179,17 @@ void main() {
       expect(mockOnEndFunction.called, 1);
     },
   );
+
+  test('AnimatedGap asserts crossAxisExtent is finite', () {
+    expect(
+      () => AnimatedGap(
+        10,
+        crossAxisExtent: double.infinity,
+        duration: _animationDuration,
+      ),
+      throwsAssertionError,
+    );
+  });
 }
 
 class _MockOnEndFunction {
