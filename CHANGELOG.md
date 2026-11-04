@@ -1,3 +1,8 @@
+## Unreleased
+### Fixed
+- Gap can be used directly inside a `Wrap` (See https://github.com/letsar/gap/issues/22)
+- Gap can be used inside a `WidgetSpan` (See https://github.com/letsar/gap/issues/27)
+
 ## 3.0.1
 ### Changed
 - Remove the usage of AbstractNode so that it can be used in 3.12.0-8.0.pre.21 (See https://github.com/letsar/gap/issues/16)

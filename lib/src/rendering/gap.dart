@@ -42,9 +42,30 @@ class RenderGap extends RenderBox {
     final parentNode = parent;
     if (parentNode is RenderFlex) {
       return parentNode.direction;
+    } else if (parentNode is RenderWrap) {
+      return parentNode.direction;
+    } else if (_isInline) {
+      return Axis.horizontal;
     } else {
       return fallbackDirection;
     }
+  }
+
+  /// Whether this gap is inside a [WidgetSpan] of a [RenderParagraph].
+  ///
+  /// The framework wraps the child of a WidgetSpan in private single-child
+  /// render objects, so we walk up through them until we find the inline child
+  /// of the paragraph.
+  bool get _isInline {
+    RenderObject? node = parent;
+    while (node is RenderObjectWithChildMixin &&
+        node is! RenderAbstractViewport) {
+      if (node.parentData is TextParentData) {
+        return true;
+      }
+      node = node.parent;
+    }
+    return false;
   }
 
   Color? get color => _color;
@@ -113,8 +134,8 @@ class RenderGap extends RenderBox {
       }
     } else {
       throw FlutterError(
-        'A Gap widget must be placed directly inside a Flex widget '
-        'or its fallbackDirection must not be null',
+        'A Gap widget must be placed directly inside a Flex or a Wrap widget, '
+        'inside a WidgetSpan, or its fallbackDirection must not be null',
       );
     }
   }

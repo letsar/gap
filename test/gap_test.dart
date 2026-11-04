@@ -171,8 +171,9 @@ void main() {
       error.toStringDeep(),
       equalsIgnoringHashCodes(
         'FlutterError\n'
-        '   A Gap widget must be placed directly inside a Flex widget or its\n'
-        '   fallbackDirection must not be null\n',
+        '   A Gap widget must be placed directly inside a Flex or a Wrap\n'
+        '   widget, inside a WidgetSpan, or its fallbackDirection must not be\n'
+        '   null\n',
       ),
     );
   });
