@@ -101,6 +101,15 @@ class Gap extends StatelessWidget {
 /// [Flex] must contain only [StatelessWidget]s or [StatefulWidget]s (not other
 /// kinds of widgets, like [RenderObjectWidget]s).
 ///
+/// A [MaxGap] is a [Flexible] with a flex factor of 1. When there is not
+/// enough space, multiple [MaxGap]s share it equally. To use another ratio,
+/// wrap a [Gap] in a [Flexible] with the flex factor you want, for example
+/// `Flexible(flex: 2, child: Gap(32))`.
+///
+/// The space a [MaxGap] does not use is not given to the other flexible
+/// children. For example, an [Expanded] next to a [MaxGap] only gets half of
+/// the free space, even if the [MaxGap] uses less than that.
+///
 /// See also:
 ///
 ///  * [Gap], the unflexible version of this widget.
